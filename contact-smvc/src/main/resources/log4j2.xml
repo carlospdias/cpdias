@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+  <Properties>
+    <Property name="logfile">${sys:jboss.server.log.dir}/contact-smvc</Property>
+  </Properties>
+
+    <Appenders>
+    <RollingFile name="RollingFile" fileName="${logfile}.log"
+                                    filePattern="${logfile}-%d{MM-dd-yyyy}-%i.log.gz"  ignoreExceptions="false">
+      <PatternLayout>
+        <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="10 MB" />
+      </Policies>
+      <DefaultRolloverStrategy max="30" />
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="br.com.cpdias.contact" level="info" additivity="false">
+      <AppenderRef ref="RollingFile"/>
+    </Logger>
+    <Logger name="org.springframework" level="info">
+      <AppenderRef ref="RollingFile"/>
+    </Logger>
+
+    <Root level="info">
+      <AppenderRef ref="RollingFile" />
+    </Root>
+  </Loggers>
+</Configuration>
