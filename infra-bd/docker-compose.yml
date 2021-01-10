@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: contact
       POSTGRES_PASSWORD: contact
       POSTGRES_DB: CONTACT_DB
-      PGDATA: /data/postgres
+      PGDATA: /_data/postgres
     ports:
       - "15432:5432"
     volumes:
