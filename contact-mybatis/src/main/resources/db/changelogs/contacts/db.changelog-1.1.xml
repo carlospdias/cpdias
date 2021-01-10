@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet author="carlospdias" id="create-table-contacts">
+
+    <createTable tableName="CONTACTS">
+      <column name="CONTACT_ID" type="numeric">
+        <constraints nullable="false" primaryKey="true"
+          unique="true" primaryKeyName="PK_CONTACT" />
+      </column>
+
+      <column name="NAME" type="VARCHAR(120)">
+        <constraints nullable="false" />
+      </column>
+
+      <column name="EMAIL" type="VARCHAR(120)">
+        <constraints nullable="false" />
+      </column>
+
+      <column name="ADDRESS" type="VARCHAR(200)">
+        <constraints nullable="false" />
+      </column>
+
+      <column name="TELEPHONE" type="VARCHAR(20)">
+        <constraints nullable="false" />
+      </column>
+
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog> 
