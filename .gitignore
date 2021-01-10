@@ -308,3 +308,6 @@ $RECYCLE.BIN/
 
 # git
 *.orig
+
+# Diretório de volume usado pelo Docker
+_data
