@@ -4,8 +4,11 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-import org.apache.ibatis.session.SqlSession;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,13 +57,16 @@ class ContactDAOHib implements ContactDAO {
 	@Override
 	public Contact get(long contactId) {
 		LOGGER.info("Restaurando o objeto  :{}", contactId);
-		return this.sessionFactory.getCurrentSession().get(Contact.class, contactId);s
+		return this.sessionFactory.getCurrentSession().get(Contact.class, contactId);
 	}
 
 	@Override
 	public List<Contact> list() {
 		LOGGER.info("Busca de todos os contacts.");
-		List<Contact>usuarios = this.sessionFactory.getCurrentSession().createCriteria(Contact.class).list();
+		CriteriaQuery<Contact> all = contactCriteria();
+
+	    TypedQuery<Contact> allQuery = this.sessionFactory.getCurrentSession().createQuery(all);
+	    List<Contact> usuarios =  allQuery.getResultList();
         
         if (usuarios != null) {
         	LOGGER.info("Retornando {} contacts.", usuarios.size());
@@ -68,6 +74,14 @@ class ContactDAOHib implements ContactDAO {
         }
         return Collections.emptyList();
         
+	}
+
+	private CriteriaQuery<Contact> contactCriteria() {
+		CriteriaBuilder cb = this.sessionFactory.getCurrentSession().getCriteriaBuilder();
+	    CriteriaQuery<Contact> cq = cb.createQuery(Contact.class);
+	    Root<Contact> rootEntry = cq.from(Contact.class);
+	    CriteriaQuery<Contact> all = cq.select(rootEntry);
+		return all;
 	}
 
 }
