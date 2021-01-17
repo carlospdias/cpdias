@@ -5,7 +5,8 @@ https://www.codejava.net/frameworks/spring/spring-mvc-with-jdbctemplate-example
 ------------
 Aplicações web para uso em projetos web para uso com _Spring MVC_.
 
-## cpdias-smvc
+
+## :white_check_mark: cpdias-smvc
 ```sh
 $ mvn archetype:generate \
   -DgroupId=br.com.cpdias.contact \
@@ -16,8 +17,7 @@ $ mvn archetype:generate \
   -DinteractiveMode=false
 ```
 
-
-## cpdias-mybatis
+## :white_check_mark: cpdias-mybatis
 ```sh
 $ mvn archetype:generate \
   -DgroupId=br.com.cpdias.contact \
