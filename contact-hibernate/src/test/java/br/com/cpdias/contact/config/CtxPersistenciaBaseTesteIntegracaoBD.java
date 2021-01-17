@@ -38,46 +38,41 @@ public class CtxPersistenciaBaseTesteIntegracaoBD {
 		dataSource.setUrl(environment.getProperty("datasource.url"));
 		dataSource.setUsername(environment.getProperty("datasource.username"));
 		dataSource.setPassword(environment.getProperty("datasource.password"));
-		
+
 		return dataSource;
 	}
 
-	@Bean
-	public DataSourceTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
-	}
 	/*
-	@Bean
-  	public JtaTransactionManager transactionManager() {
-       return new JtaTransactionManagerFactoryBean().getObject();
-    }
+	 * @Bean public DataSourceTransactionManager transactionManager() { return new
+	 * DataSourceTransactionManager(dataSource()); }
+	 */
+	/*
+	 * @Bean public JtaTransactionManager transactionManager() { return new
+	 * JtaTransactionManagerFactoryBean().getObject(); }
 	 */
 	@Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setAnnotatedClasses(Contact.class);
-        sessionFactory.setHibernateProperties(hibernateProperties());
+	public PlatformTransactionManager hibernateTransactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(sessionFactory().getObject());
+		return transactionManager;
+	}
 
-        return sessionFactory;
-    }
-   
-    @Bean
-    public PlatformTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager
-          = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory().getObject());
-        return transactionManager;
-    }
+	@Bean
+	public LocalSessionFactoryBean sessionFactory() {
+		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource());
+		sessionFactory.setAnnotatedClasses(Contact.class);
+		sessionFactory.setHibernateProperties(hibernateProperties());
 
-    private final Properties hibernateProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(
-          "hibernate.hbm2ddl.auto", "validate");
-        hibernateProperties.setProperty(
-          "hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		return sessionFactory;
+	}
 
-        return hibernateProperties;
-    }
+	private final Properties hibernateProperties() {
+		Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "validate");
+		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+
+		return hibernateProperties;
+	}
 
 }

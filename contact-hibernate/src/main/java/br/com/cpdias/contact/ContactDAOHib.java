@@ -14,6 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("contactDao")
 class ContactDAOHib implements ContactDAO {
@@ -29,12 +32,14 @@ class ContactDAOHib implements ContactDAO {
 	}
 
 	@Override
+	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.MANDATORY)
 	public void save(Contact contact) {
-		LOGGER.info("Gravando o objeto contact :{}", contact.toString());
+		LOGGER.info("Gravando o objeto contact :{}", contact.stringToLog());
 		try {
 			this.sessionFactory.getCurrentSession().save(contact);
 		}
 		catch(Exception exc) {
+			LOGGER.error("fALHA",exc.getMessage());
 			throw new PersistenceException(exc.getMessage(), exc.getCause());
 		}
 	}
