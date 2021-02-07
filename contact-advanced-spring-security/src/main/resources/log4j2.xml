@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+  <Properties>
+    <Property name="logfile">${sys:jboss.server.log.dir}/contact-smvc</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="%m%n"/>
+    </Console>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="br.com.cpdias.contact" level="info" additivity="false">
+      <AppenderRef ref="STDOUT" />
+    </Logger>
+    <Logger name="org.springframework.security" level="debug" additivity="true">
+        <appender-ref ref="STDOUT" level="debug" />
+    </Logger>
+    <Logger name="org.springframework" level="info">
+      <AppenderRef ref="STDOUT" level="debug" />
+    </Logger>
+
+    <Root level="debug">
+      <AppenderRef ref="STDOUT" />
+    </Root>
+  </Loggers>
+</Configuration>
