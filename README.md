@@ -2,6 +2,14 @@
 https://www.codejava.net/frameworks/spring/spring-mvc-spring-data-jpa-hibernate-crud-example
 https://www.codejava.net/frameworks/spring/spring-mvc-with-jdbctemplate-example
 
+
+----------------
+## Exemplo de Segurança
+ - http://javahotpot.blogspot.com/2013/12/spring-security-adding-more-information.html
+ - https://www.baeldung.com/spring-security-taglibs
+ - https://www.boraji.com/spring-mvc-5-spring-security-5-hibernate-5-example
+ - https://mkyong.com/spring-security/spring-security-hibernate-annotation-example/
+
 ------------
 Aplicações web para uso em projetos web para uso com _Spring MVC_.
 
