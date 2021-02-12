@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet author="carlospdias" id="it-insert-contact">
+    <insert tableName="CONTACTS">
+        <column name="CONTACT_ID"    valueSequenceNext="seq_contact"/>
+        <column name="NAME"          value="Vernon Raid"/>
+        <column name="EMAIL"         value="verno@color.com"/>
+        <column name="ADDRESS"       value="Primrose Lane 143"/>
+        <column name="TELEPHONE"     value="(55)334455661"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog> 
